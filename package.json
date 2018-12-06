@@ -1,6 +1,6 @@
 {
   "name": "payu-node",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Module for PayU Payments Platform",
   "main": "lib/payu/index.js",
   "scripts": {
