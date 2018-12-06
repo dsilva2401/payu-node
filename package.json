@@ -1,0 +1,43 @@
+{
+  "name": "payu-node",
+  "version": "0.0.1",
+  "description": "Module for PayU Payments Platform",
+  "main": "lib/payu/index.js",
+  "scripts": {
+    "test": "npm run compile && mocha -t 30000 --reporter spec test/index.js",
+    "build": "npm run compile",
+    "compile": "babel ./src -s --out-dir ./lib --presets es2015",
+    "prepublishOnly": "npm run compile",
+    "postinstall": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dsilva2401/payu-node.git"
+  },
+  "keywords": [
+    "payu",
+    "visa",
+    "mastercard",
+    "payments",
+    "amex",
+    "creditcard"
+  ],
+  "author": "Diego Silva <dsilva2401@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dsilva2401/payu-node/issues"
+  },
+  "homepage": "https://github.com/dsilva2401/payu-node#readme",
+  "dependencies": {
+    "base-64": "^0.1.0",
+    "jsonschema": "^1.2.4",
+    "q": "^1.5.1",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0"
+  }
+}
