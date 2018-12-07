@@ -9,7 +9,7 @@ module.exports = function (payUUrlsMap, accountData) {
     // Create client
     transactions.createClient = function (data) {
         var deferred = Q.defer();
-        httpRequest('POST', payUUrlsMap.payments+'/rest/v4.9/customers/', {
+        httpRequest('POST', payUUrlsMap.recurringPayments+'/rest/v4.9/customers/', {
             headers: {
                 'Authorization': 'Basic '+secureHash
             },
@@ -30,7 +30,7 @@ module.exports = function (payUUrlsMap, accountData) {
     transactions.createPlan = function (data) {
         data.accountId = accountData.accountId;
         var deferred = Q.defer();
-        httpRequest('POST', payUUrlsMap.payments+'/rest/v4.9/plans/', {
+        httpRequest('POST', payUUrlsMap.recurringPayments+'/rest/v4.9/plans/', {
             headers: {
                 'Authorization': 'Basic '+secureHash
             },
@@ -50,7 +50,7 @@ module.exports = function (payUUrlsMap, accountData) {
     // Create credit card
     transactions.createCreditCard = function (clientId, data) {
         var deferred = Q.defer();
-        httpRequest('POST', payUUrlsMap.payments+'/rest/v4.9/customers/'+clientId+'/creditCards', {
+        httpRequest('POST', payUUrlsMap.recurringPayments+'/rest/v4.9/customers/'+clientId+'/creditCards', {
             headers: {
                 'Authorization': 'Basic '+secureHash
             },
@@ -70,7 +70,7 @@ module.exports = function (payUUrlsMap, accountData) {
     // Create suscription
     transactions.createSuscription = function (data) {
         var deferred = Q.defer();
-        httpRequest('POST', payUUrlsMap.payments+'/rest/v4.9/subscriptions/', {
+        httpRequest('POST', payUUrlsMap.recurringPayments+'/rest/v4.9/subscriptions/', {
             headers: {
                 'Authorization': 'Basic '+secureHash
             },
@@ -90,7 +90,7 @@ module.exports = function (payUUrlsMap, accountData) {
     // Get suscription data
     transactions.getSuscriptionData = function (subscriptionId) {
         var deferred = Q.defer();
-        httpRequest('GET', payUUrlsMap.payments+'/rest/v4.9/subscriptions/'+subscriptionId, {
+        httpRequest('GET', payUUrlsMap.recurringPayments+'/rest/v4.9/subscriptions/'+subscriptionId, {
             headers: {
                 'Authorization': 'Basic '+secureHash
             },
@@ -110,7 +110,7 @@ module.exports = function (payUUrlsMap, accountData) {
     transactions.getBills = function (query) {
         var deferred = Q.defer();
         var queryUrl = Object.keys(query).map(function (k) { return k+'='+query[k] }).join('&');
-        httpRequest('GET', payUUrlsMap.payments+'/rest/v4.9/recurringBill?'+queryUrl, {
+        httpRequest('GET', payUUrlsMap.recurringPayments+'/rest/v4.9/recurringBill?'+queryUrl, {
             headers: {
                 'Authorization': 'Basic '+secureHash
             },

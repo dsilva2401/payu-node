@@ -1,5 +1,9 @@
 import {validate as validateJSONSchema} from 'jsonschema';
 var recurringPayments = require('./recurringPayments');
+var tools = require('./tools');
+var queries = require('./queries');
+var tokenization = require('./tokenization');
+var payments = require('./payments');
 
 class PayU {
 
@@ -24,20 +28,27 @@ class PayU {
                 })
             break;
         }
+        this.accountData.test = (this.environment == 'dev');
 
         // Setup transactions
         this.recurringPayments = recurringPayments(this.payUUrlsMap, this.accountData);
+        this.tools = tools(this.payUUrlsMap, this.accountData);
+        this.queries = queries(this.payUUrlsMap, this.accountData);
+        this.tokenization = tokenization(this.payUUrlsMap, this.accountData);
+        this.payments = payments(this.payUUrlsMap, this.accountData);
     }
 
     getPayUUrlsMapByEnvironment (env) {
         return ({
             dev: {
                 queries: 'https://sandbox.api.payulatam.com/reports-api/4.0/service.cgi',
-                payments: 'https://sandbox.api.payulatam.com/payments-api',
+                recurringPayments: 'https://sandbox.api.payulatam.com/payments-api',
+                payments: 'https://sandbox.api.payulatam.com/payments-api/4.0/service.cgi',
             },
             prod: {
                 queries: 'https://api.payulatam.com/reports-api/4.0/service.cgi',
-                payments: 'https://api.payulatam.com/payments-api',
+                recurringPayments: 'https://api.payulatam.com/payments-api',
+                payments: 'https://api.payulatam.com/payments-api/4.0/service.cgi',
             },
         })[env];
     }

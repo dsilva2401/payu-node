@@ -10,7 +10,8 @@ var sharedData = {};
 /**
  * Transactions
  */
-describe('Recurring payment transactions', function () {
+
+describe('Recurring payments', function () {
 
     it('Create plan', function (done) {
         payU.recurringPayments.createPlan(
@@ -49,6 +50,37 @@ describe('Recurring payment transactions', function () {
             )
         ).then(function (suscriptionData) {
             sharedData.suscriptionData = suscriptionData;
+            done();
+        }).catch(function (err) { throw err });
+    });
+
+    it('Get bills by suscription id', function (done) {
+        payU.recurringPayments.getBills({
+            suscriptionId: sharedData.suscriptionData.id
+        }).then(function (billsData) {
+            sharedData.billsData = billsData;
+            done();
+        }).catch(function (err) { throw err });
+    });
+
+});
+
+describe('Tools', function () {
+
+    it('Ping payu server', function (done) {
+        payU.tools.ping().then(function () {
+            done();
+        }).catch(function (err) { throw err });
+    });
+
+});
+
+describe('Payments', function () {
+
+    it('Authorize and checkout', function (done) {
+        payU.payments.authorizeAndCheckout(
+            data.authorizeAndCheckoutData()
+        ).then(function (r) {
             done();
         }).catch(function (err) { throw err });
     });
